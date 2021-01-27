@@ -15,16 +15,18 @@ function App() {
           <div className='col-2 sidebar'>
             <Sidebar />
           </div>
-          <div className='col-10 dashboard'>
-            <Switch>
-              <Route path='/' exact component={Dashboard} />
-              <Route exact path='/profile' component={Profile} />
-              <Route
-                exact
-                path='/destinations'
-                component={ExploreDestination}
-              />
-            </Switch>
+          <div className='col-10 body'>
+            <div className='container'>
+              <Switch>
+                <Route path='/' exact component={Dashboard} />
+                <Route exact path='/profile' component={Profile} />
+                <Route
+                  exact
+                  path='/destinations'
+                  component={ExploreDestination}
+                />
+              </Switch>
+            </div>
           </div>
         </div>
       </div>
