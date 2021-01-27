@@ -5,19 +5,20 @@ import Sidebar from './utilities/Sidebar';
 import Dashboard from './views/Dashboard';
 import Profile from './views/Profile';
 import ExploreDestination from './views/ExploreDestination';
+import Universities from './views/Universities';
 
 function App() {
   return (
     <Router>
       <div className='App'>
-        <Route exact path='/login' component={Login} />
-        <div className='row'>
-          <div className='col-2 sidebar'>
-            <Sidebar />
-          </div>
-          <div className='col-10 body'>
-            <div className='container'>
-              <Switch>
+        <Switch>
+          <Route exact path='/login' component={Login} />
+          <div className='row'>
+            <div className='col-lg-3 sidebar'>
+              <Sidebar />
+            </div>
+            <div className='col-lg-9 body'>
+              <div className='container'>
                 <Route path='/' exact component={Dashboard} />
                 <Route exact path='/profile' component={Profile} />
                 <Route
@@ -25,10 +26,11 @@ function App() {
                   path='/destinations'
                   component={ExploreDestination}
                 />
-              </Switch>
+                <Route exact path='/universities' component={Universities} />
+              </div>
             </div>
           </div>
-        </div>
+        </Switch>
       </div>
     </Router>
   );

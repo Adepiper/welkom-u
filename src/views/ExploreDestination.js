@@ -10,7 +10,7 @@ const ExploreDestination = () => {
       </div>
       <div className='destination-body'>
         <div className='row'>
-          <div className='col-md-4'>
+          <div className='col-md-8 col-lg-4'>
             <div className='main-destination'>
               <h2>Main destination</h2>
               <div className='destination active'>
@@ -43,9 +43,9 @@ const ExploreDestination = () => {
               </div>
             </div>
           </div>
-          <div className='col-md-4'></div>
+          <div className='col-md-4 col-lg-8'></div>
 
-          <div className='col-md-4'>
+          <div className='col-md-6 col-lg-8'>
             <div className='country-info'>
               <div className='country-info-header'>
                 <div className='province'>

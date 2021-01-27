@@ -11,6 +11,7 @@
   padding: 30px;
   display: flex;
   align-items: center;
+  z-index: 1000;
 }
 
 .login-container .login-body {
@@ -21,7 +22,7 @@
 .login-container .login-text p {
   font-family: 'Lato';
   font-size: 30px;
-  margin-left: 40px;
+  margin-left: 20px;
 
   color: #ffffff;
 }
@@ -132,7 +133,7 @@
   box-sizing: border-box;
 }
 .App {
-  overflow: hidden;
+  overflow-x: hidden;
   height: 100vh;
 }
 .App .row {
@@ -140,7 +141,11 @@
 }
 
 .sidebar {
-  height: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
   background: #e2eaeb;
 }
 .sidebar > div {
@@ -158,8 +163,7 @@
 .sidebar .header > div {
   margin: 0 10px;
 }
-
-W .sidebar .nav-home {
+.sidebar .nav-home {
   width: 100%;
 }
 
@@ -188,10 +192,57 @@ W .sidebar .nav-home {
   margin: 0 10px;
 }
 
+.body {
+  margin-left: 25vw;
+}
+
 .body .container {
   width: 90%;
   padding: 20px 0;
   margin: auto;
+}
+
+@media all and (max-width: 991px) {
+  .sidebar {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #e2eaeb;
+    width: 200px;
+    overflow: hidden;
+  }
+  .sidebar li a {
+    font-size: 11px;
+  }
+
+  .sidebar .header {
+    display: flex;
+    margin: 40px 0;
+    padding: 0 20px;
+    align-items: center;
+    color: #424242;
+  }
+
+  .sidebar .header h4 {
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+@media all and (max-width: 767px) {
+  .sidebar {
+    width: 180px;
+    display: none;
+  }
+  .sidebar.active {
+    display: block;
+  }
+  .sidebar li a {
+    font-size: 10px;
+  }
+  .body {
+    margin-left: 0;
+  }
 }
 
 .slider {
@@ -216,7 +267,7 @@ W .sidebar .nav-home {
   border-radius: 20px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   display: flex;
-  width: 80%;
+  width: 100%;
   align-items: center;
   color: #424242;
   background-color: #e7e6e6;
@@ -292,4 +343,109 @@ W .sidebar .nav-home {
 }
 .country-info-body .card p {
   font-size: 12px;
+}
+
+@media all and (max-width: 991px) {
+  .destination {
+    width: 90%;
+  }
+}
+
+.dashboard-cards {
+  margin: 30px 0;
+}
+
+.dashboard-cards .card {
+  width: 90%;
+  height: 150px;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0, 0, 2px rgba(0, 0, 0, 0.9);
+  color: #0b5180;
+}
+.dashboard-cards .card.currency {
+  background-color: rgba(250, 237, 233, 0.775);
+}
+
+.dashboard-cards .card.accomodation {
+  background-color: rgba(206, 230, 240, 0.741);
+}
+
+.dashboard-cards .card.explore {
+  background-color: rgba(164, 235, 235, 0.734);
+}
+
+.dashboard-cards .card h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 7px 0;
+}
+
+.dashboard-cards .card p {
+  font-size: 13px;
+}
+.universities {
+  font-size: 13px;
+}
+
+.universities .univerisity-img img {
+  height: 200px;
+  border-radius: 20px;
+}
+
+.universities .card.universities-list {
+  align-items: center;
+  flex-direction: row !important;
+  padding: 10px;
+  border: none;
+}
+.about-university {
+  padding: 20px;
+}
+
+.about-university-header {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  margin: 5px 0;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.about-university-header .logo img {
+  height: 30px;
+}
+
+.university-name {
+  margin-left: 10px;
+}
+
+.about-university-header span {
+  font-size: 9px !important;
+  color: #424242;
+}
+
+.universities-list .about {
+  margin: 10px 0;
+  color: #424242;
+}
+
+.universities-list .about h4 {
+  font-size: 14px;
+  font-weight: 600;
+}
+.universities-list .view-more {
+  text-align: right;
+}
+.universities-list .view-more a {
+  text-decoration: none;
+  color: #0b5180;
+}
+
+@media all and (max-width: 1024px) {
+  .universities .card.universities-list {
+    flex-direction: column !important;
+  }
 }
