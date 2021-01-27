@@ -1,5 +1,7 @@
 import SlidingImages from '../utilities/SliderImages';
-const ExploreDestination = () => {
+import React from 'react';
+const ExploreDestination = (props) => {
+  const { openModal } = props;
   return (
     <div className='destination-container'>
       <div className='page-header'>
@@ -58,7 +60,9 @@ const ExploreDestination = () => {
                   </p>
                 </div>
                 <div className='change-location'>
-                  <button className='btn'>Change Location</button>
+                  <button onClick={openModal} className='btn'>
+                    Change Location
+                  </button>
                 </div>
               </div>
 
