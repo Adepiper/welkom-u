@@ -11,12 +11,22 @@ function App() {
     <Router>
       <div className='App'>
         <Route exact path='/login' component={Login} />
-        <Sidebar />
-        <Switch>
-          <Route path='/' exact component={Dashboard} />
-          <Route exact path='/profile' component={Profile} />
-          <Route exact path='/destinations' component={ExploreDestination} />
-        </Switch>
+        <div className='row'>
+          <div className='col-2 sidebar'>
+            <Sidebar />
+          </div>
+          <div className='col-10 dashboard'>
+            <Switch>
+              <Route path='/' exact component={Dashboard} />
+              <Route exact path='/profile' component={Profile} />
+              <Route
+                exact
+                path='/destinations'
+                component={ExploreDestination}
+              />
+            </Switch>
+          </div>
+        </div>
       </div>
     </Router>
   );

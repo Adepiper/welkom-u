@@ -125,3 +125,68 @@
     margin: auto;
   }
 }
+
+.App * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.App {
+  overflow: hidden;
+  height: 100vh;
+}
+.App .row {
+  height: 100%;
+}
+
+.sidebar {
+  height: 100%;
+  background: #e2eaeb;
+}
+.sidebar > div {
+  width: 100%;
+}
+
+.sidebar .header {
+  display: flex;
+  margin: 40px 0;
+  padding: 0 20px;
+  align-items: center;
+  color: #424242;
+}
+
+.sidebar .header > div {
+  margin: 0 10px;
+}
+
+.dashboard {
+  background-color: blue;
+}
+.sidebar .nav-home {
+  width: 100%;
+}
+
+.sidebar li {
+  list-style: none;
+  width: 100%;
+}
+
+.sidebar li a {
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+  display: block;
+  font-size: 16px;
+  text-decoration: none;
+  color: #606060;
+}
+
+.sidebar li a.active {
+  background: #0071bc;
+  color: white;
+}
+
+.sidebar li a span,
+.sidebar li a i {
+  margin: 0 10px;
+}
