@@ -357,10 +357,10 @@
 
 .dashboard-cards .card {
   width: 90%;
-  height: 150px;
-  justify-content: center;
-  padding: 10px;
+  /* height: 150px; */
+  padding: 20px;
   border-radius: 10px;
+  margin: 10px 0;
   border: none;
   box-shadow: 0, 0, 2px rgba(0, 0, 0, 0.9);
   color: #0b5180;
