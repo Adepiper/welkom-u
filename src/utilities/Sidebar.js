@@ -1,4 +1,5 @@
 import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Sidebar = (props) => {
   const { location } = props;
@@ -17,40 +18,26 @@ const Sidebar = (props) => {
 
       <div className='nav-home'>
         <li>
-          <a href='' className='active'>
+          <Link to='/' className='active'>
             <i className='fas fa-home'></i> <span>My Listings</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a href=''>
+          <Link to='/destinations'>
             <i className='far fa-heart'></i> <span>Accomodation Interests</span>
-          </a>
+          </Link>
         </li>
+
         <li>
-          <a href=''>
-            <i className='fas fa-money-bill-wave-alt'></i>
-            <span>Transactions</span>
-          </a>
-        </li>
-        <li>
-          <a href=''>
+          <Link to='/profile'>
             <i className='fas fa-user-alt'></i> <span>Profile</span>
-          </a>
+          </Link>
         </li>
+
         <li>
-          <a href=''>
-            <i className='fas fa-sliders-h'></i> <span>Settings</span>
-          </a>
-        </li>
-        <li>
-          <a href=''>
-            <i className='fas fa-bell'></i> <span>Notiications</span>
-          </a>
-        </li>
-        <li>
-          <a href=''>
+          <Link to='/'>
             <i className='fas fa-times'></i> <span>Logout</span>
-          </a>
+          </Link>
         </li>
       </div>
     </div>

@@ -1,5 +1,4 @@
 const UniversityDetails = ({ university }) => {
-  console.log(university);
   return (
     <div className='col-md-8 '>
       <div className='card universities-list'>

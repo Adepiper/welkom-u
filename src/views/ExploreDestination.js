@@ -2,7 +2,7 @@ import SlidingImages from '../utilities/SliderImages';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 const ExploreDestination = (props) => {
-  const { openModal, fetchProvinces } = props;
+  const { openModal, fetchProvinces, city, province } = props;
   return (
     <div className='destination-container'>
       <div className='page-header'>
@@ -25,7 +25,7 @@ const ExploreDestination = (props) => {
                 </div>
                 <div className='destination-country'>
                   <h3>Canada</h3>
-                  <p>New Brunswick, Federation </p>
+                  {province}, {city}{' '}
                 </div>
               </div>
             </div>
@@ -41,7 +41,7 @@ const ExploreDestination = (props) => {
                 </div>
                 <div className='destination-country'>
                   <h3>Canada</h3>
-                  <p>New Brunswick, Federation </p>
+                  <p></p>
                 </div>
               </div>
             </div>
@@ -54,10 +54,10 @@ const ExploreDestination = (props) => {
                 <div className='province'>
                   <h4>Canada</h4>
                   <p>
-                    <b>Province:</b> New Brunswick
+                    <b>Province:</b> {province}
                   </p>
                   <p>
-                    <b>City:</b> Federation
+                    <b>City:</b> {city}
                   </p>
                 </div>
                 <div className='change-location'>

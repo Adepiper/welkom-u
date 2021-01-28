@@ -12,7 +12,10 @@ import ModalDialog from './utilities/ModalDialog';
 function App() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [provinces, setProvinces] = useState([]);
+  const [provinceLoading, setProvinceLoading] = useState(false);
   const [cities, setCities] = useState([]);
+  const [city, setCity] = useState('Federation');
+  const [province, setProvince] = useState('New Brunswick');
   const [universities, setUniversities] = useState({});
   const openModal = () => {
     setIsOpen(true);
@@ -23,11 +26,14 @@ function App() {
   };
 
   const fetchProvinces = async () => {
+    setProvinceLoading(true);
     const res = await fetch(
       'https://api.welkom-u.ca/WelkomU_Test/api/CityProvince/GetAllProvinces'
     );
     const data = await res.json();
+
     setProvinces(data.result.provinces);
+    setProvinceLoading(false);
   };
   const fetchCities = async (value) => {
     const res = await fetch(
@@ -42,7 +48,8 @@ function App() {
       `https://api.welkom-u.ca/WelkomU_Test/api/UniversityManagement/GetAllUniversity?ProvinceValue=${params.province}&CityValue=${params.city}&PageSize=2&CurrentPage=1`
     );
     const data = await res.json();
-    console.log(data);
+    setProvince(params.province);
+    setCity(params.city);
 
     setUniversities(data.universities);
 
@@ -59,6 +66,7 @@ function App() {
           cities={cities}
           fetchCities={fetchCities}
           fetchUniversities={fetchUniversities}
+          provinceLoading={provinceLoading}
         />
         <Switch>
           <Route exact path='/login' component={Login} />
@@ -78,6 +86,8 @@ function App() {
                       <ExploreDestination
                         openModal={openModal}
                         fetchProvinces={fetchProvinces}
+                        city={city}
+                        province={province}
                       />
                       ;
                     </>
