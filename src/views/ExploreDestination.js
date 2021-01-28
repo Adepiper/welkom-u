@@ -1,7 +1,8 @@
 import SlidingImages from '../utilities/SliderImages';
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 const ExploreDestination = (props) => {
-  const { openModal } = props;
+  const { openModal, fetchProvinces } = props;
   return (
     <div className='destination-container'>
       <div className='page-header'>
@@ -60,14 +61,20 @@ const ExploreDestination = (props) => {
                   </p>
                 </div>
                 <div className='change-location'>
-                  <button onClick={openModal} className='btn'>
+                  <button
+                    onClick={() => {
+                      openModal();
+                      fetchProvinces();
+                    }}
+                    className='btn'
+                  >
                     Change Location
                   </button>
                 </div>
               </div>
 
               <div className='country-info-body'>
-                <div className='card'>
+                <Link to='/universities' className='card'>
                   <div>
                     <h3>Universities</h3>
                     <p>Explore your Universities</p>
@@ -75,34 +82,7 @@ const ExploreDestination = (props) => {
                   <div>
                     <i className='fas fa-chevron-right'></i>
                   </div>
-                </div>
-                <div className='card'>
-                  <div>
-                    <h3>Universities</h3>
-                    <p>Explore your Universities</p>
-                  </div>
-                  <div>
-                    <i className='fas fa-chevron-right'></i>
-                  </div>
-                </div>
-                <div className='card'>
-                  <div>
-                    <h3>Universities</h3>
-                    <p>Explore your Universities</p>
-                  </div>
-                  <div>
-                    <i className='fas fa-chevron-right'></i>
-                  </div>
-                </div>
-                <div className='card'>
-                  <div>
-                    <h3>Universities</h3>
-                    <p>Explore your Universities</p>
-                  </div>
-                  <div>
-                    <i className='fas fa-chevron-right'></i>
-                  </div>
-                </div>
+                </Link>
               </div>
             </div>
           </div>

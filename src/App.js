@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import React from 'react';
+import React, { useState } from 'react';
 import Login from './views/Login';
 import Sidebar from './utilities/Sidebar';
 import Dashboard from './views/Dashboard';
@@ -10,25 +10,55 @@ import Universities from './views/Universities';
 import ModalDialog from './utilities/ModalDialog';
 
 function App() {
-  let subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [provinces, setProvinces] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [universities, setUniversities] = useState({});
   const openModal = () => {
     setIsOpen(true);
-  };
-  const afterOpenModal = () => {
-    // subtitle.style.color = '#f00';
   };
 
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  const fetchProvinces = async () => {
+    const res = await fetch(
+      'https://api.welkom-u.ca/WelkomU_Test/api/CityProvince/GetAllProvinces'
+    );
+    const data = await res.json();
+    setProvinces(data.result.provinces);
+  };
+  const fetchCities = async (value) => {
+    const res = await fetch(
+      `https://api.welkom-u.ca/WelkomU_Test/api/CityProvince/GetAllCities?ProvinceName=${value}`
+    );
+    const data = await res.json();
+    setCities(data.result.cities);
+  };
+
+  const fetchUniversities = async (params) => {
+    const res = await fetch(
+      `https://api.welkom-u.ca/WelkomU_Test/api/UniversityManagement/GetAllUniversity?ProvinceValue=${params.province}&CityValue=${params.city}&PageSize=2&CurrentPage=1`
+    );
+    const data = await res.json();
+    console.log(data);
+
+    setUniversities(data.universities);
+
+    console.log(universities);
+  };
+
   return (
     <Router>
       <div className='App'>
         <ModalDialog
+          provinces={provinces}
           modalIsOpen={modalIsOpen}
-          afterOpenModal={afterOpenModal}
           closeModal={closeModal}
+          cities={cities}
+          fetchCities={fetchCities}
+          fetchUniversities={fetchUniversities}
         />
         <Switch>
           <Route exact path='/login' component={Login} />
@@ -45,11 +75,25 @@ function App() {
                   path='/destinations'
                   render={(props) => (
                     <>
-                      <ExploreDestination openModal={openModal} />;
+                      <ExploreDestination
+                        openModal={openModal}
+                        fetchProvinces={fetchProvinces}
+                      />
+                      ;
                     </>
                   )}
                 />
-                <Route exact path='/universities' component={Universities} />
+                <Route
+                  exact
+                  path='/universities'
+                  render={(props) => (
+                    <>
+                      {universities && (
+                        <Universities universities={universities} />
+                      )}
+                    </>
+                  )}
+                />
               </div>
             </div>
           </div>
