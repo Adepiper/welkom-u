@@ -1,15 +1,16 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import React, { useState } from 'react';
-import Login from './views/Login';
+import React, { useState, useEffect } from 'react';
+
 import Sidebar from './utilities/Sidebar';
 import Dashboard from './views/Dashboard';
 import Profile from './views/Profile';
 import ExploreDestination from './views/ExploreDestination';
 import Universities from './views/Universities';
 import ModalDialog from './utilities/ModalDialog';
+import LoginUser from './views/LoginUser';
 
-function App() {
+function App({ history }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [provinces, setProvinces] = useState([]);
   const [provinceLoading, setProvinceLoading] = useState(false);
@@ -17,6 +18,9 @@ function App() {
   const [city, setCity] = useState('Federation');
   const [province, setProvince] = useState('New Brunswick');
   const [universities, setUniversities] = useState({});
+  const [error, setError] = useState('');
+  const [token, setToken] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const openModal = () => {
     setIsOpen(true);
   };
@@ -56,6 +60,25 @@ function App() {
     console.log(universities);
   };
 
+  const createLogin = async (body) => {
+    const settings = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    };
+    const res = await fetch(
+      `https://api.welkom-u.ca/WelkomU_Test/api/ProfileManagement/LoginUser`,
+      settings
+    );
+    const data = await res.json();
+    data.result.authToken
+      ? setIsAuthenticated(true)
+      : setError(data.result.responseDescription);
+  };
+
   return (
     <Router>
       <div className='App'>
@@ -69,7 +92,15 @@ function App() {
           provinceLoading={provinceLoading}
         />
         <Switch>
-          <Route exact path='/login' component={Login} />
+          <Route
+            exact
+            path='/login'
+            render={(props) => (
+              <>
+                <LoginUser createLogin={createLogin} error={error} />;
+              </>
+            )}
+          />
           <div className='row'>
             <div className='col-lg-3 sidebar'>
               <Sidebar />

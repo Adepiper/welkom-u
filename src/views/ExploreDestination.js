@@ -1,5 +1,5 @@
 import SlidingImages from '../utilities/SliderImages';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 const ExploreDestination = (props) => {
   const { openModal, fetchProvinces, city, province } = props;

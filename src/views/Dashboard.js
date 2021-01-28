@@ -1,6 +1,4 @@
 import flat from './images/flat.svg';
-import Group from './images/Group.svg';
-
 const Dashboard = () => {
   return (
     <div className='dashboard-container'>
