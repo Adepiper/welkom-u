@@ -1,5 +1,6 @@
 import Modal from 'react-modal';
 import React, { useState } from 'react';
+import coronavirus from '../views/images/coronavirus.svg';
 import {
   Spinner,
   FormControl,
@@ -8,14 +9,6 @@ import {
   Button,
 } from 'react-bootstrap';
 const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
   overlay: {
     position: 'fixed',
     top: 0,
@@ -77,72 +70,82 @@ const ModalDialog = (props) => {
         >
           close
         </button>
+        <div className='world'>
+          <img src={coronavirus} alt='' />
+          <h3 id='heading'>Filter through your preferences</h3>
+          <p id='subheading'>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. At, minus
+            ab nihil incidunt rem accusantium
+          </p>
+        </div>
 
-        <form onSubmit={onSubmit}>
-          {provinceLoading ? (
-            <Spinner animation='border' />
-          ) : (
-            <>
-              <FormGroup>
-                <FormLabel>Provinces</FormLabel>
-                <FormControl
-                  value={province}
-                  onChange={(e) => setProvince(e.target.value)}
-                  as='select'
-                >
-                  {provinces.length > 0
-                    ? provinces.map((province, index) => {
-                        return (
-                          <option
-                            key={province.provinceId}
-                            value={province.name}
-                          >
-                            {province.name}
-                          </option>
-                        );
-                      })
-                    : 'loading...'}
-                </FormControl>
-              </FormGroup>
-            </>
-          )}
-
-          <FormGroup>
-            <FormLabel>Provinces</FormLabel>
-            <FormControl
-              value={city}
-              name=''
-              onChange={(e) => setCity(e.target.value)}
-              as='select'
-            >
-              {cities.length > 0
-                ? cities.map((city, index) => {
-                    return (
-                      <option key={city.id} value={city.name}>
-                        {city.name}
-                      </option>
-                    );
-                  })
-                : 'loading...'}
-            </FormControl>
-          </FormGroup>
-          {loading ? (
-            <Button variant='primary' disabled>
-              <Spinner
-                as='span'
-                animation='grow'
-                size='sm'
-                role='status'
-                aria-hidden='true'
-              />
-              Loading...
-            </Button>
-          ) : (
-            <Button type='submit' variant='primary'>
-              Filter
-            </Button>
-          )}
-        </form>
+        <div className='container'>
+          <form action='' onSubmit={onSubmit}>
+            {provinceLoading ? (
+              <Spinner animation='border' />
+            ) : (
+              <>
+                <FormGroup>
+                  <FormLabel>Provinces</FormLabel>
+                  <FormControl
+                    value={province}
+                    onChange={(e) => setProvince(e.target.value)}
+                    as='select'
+                  >
+                    {provinces.length > 0
+                      ? provinces.map((province, index) => {
+                          return (
+                            <option
+                              key={province.provinceId}
+                              value={province.name}
+                            >
+                              {province.name}
+                            </option>
+                          );
+                        })
+                      : 'loading...'}
+                  </FormControl>
+                </FormGroup>
+                <FormGroup>
+                  <FormLabel>Provinces</FormLabel>
+                  <FormControl
+                    value={city}
+                    name=''
+                    onChange={(e) => setCity(e.target.value)}
+                    as='select'
+                  >
+                    {cities.length > 0
+                      ? cities.map((city, index) => {
+                          return (
+                            <option key={city.id} value={city.name}>
+                              {city.name}
+                            </option>
+                          );
+                        })
+                      : 'loading...'}
+                  </FormControl>
+                </FormGroup>
+                {loading ? (
+                  <Button className='save-btn' disabled>
+                    <Spinner
+                      as='span'
+                      animation='grow'
+                      size='sm'
+                      role='status'
+                      aria-hidden='true'
+                    />
+                    Loading...
+                  </Button>
+                ) : (
+                  <Button type='submit' className='save-btn' variant='primary'>
+                    Filter
+                  </Button>
+                )}{' '}
+                */
+              </>
+            )}
+          </form>
+        </div>
       </Modal>
     </div>
   );

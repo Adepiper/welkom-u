@@ -1,12 +1,13 @@
 import { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 const LoginUser = (props) => {
-  const { createLogin, error } = props;
+  const { createLogin, error, history } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const login = async (e) => {
     e.preventDefault();
-    await createLogin({ email, password });
+    await createLogin({ email: email, password: password });
 
     setEmail('');
     setPassword('');
@@ -29,7 +30,7 @@ const LoginUser = (props) => {
                 className='alert text-center alert-warning alert-dismissible fade show'
                 role='alert'
               >
-                <strong>{error}</strong>
+                <p className='py-3'>{error}</p>
                 <button
                   type='button'
                   className='btn-close'
@@ -69,4 +70,4 @@ const LoginUser = (props) => {
   );
 };
 
-export default LoginUser;
+export default withRouter(LoginUser);

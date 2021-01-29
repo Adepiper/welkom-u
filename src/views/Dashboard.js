@@ -1,4 +1,5 @@
 import flat from './images/flat.svg';
+import { withRouter } from 'react-router-dom';
 const Dashboard = () => {
   return (
     <div className='dashboard-container'>
@@ -48,4 +49,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default withRouter(Dashboard);
