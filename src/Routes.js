@@ -19,10 +19,8 @@ const Routes = (props) => {
   const [cities, setCities] = useState([]);
   const [userCity, setUserCity] = useState('');
   const [userProvince, setUserProvince] = useState('');
-  const [universities, setUniversities] = useState({});
   const [error, setError] = useState('');
-  const [token, setToken] = useState('');
-  const [userdata, setUserData] = useState([]);
+  const [userdata, setUserData] = useState({});
 
   const openModal = () => {
     setIsOpen(true);
@@ -54,13 +52,10 @@ const Routes = (props) => {
   const fetchUniversities = async (params) => {
     console.log(params);
     const res = await fetch(
-      `https://api.welkom-u.ca/WelkomU_Test/api/UniversityManagement/GetAllUniversity?ProvinceValue=${params.province}&CityValue=${params.city}&PageSize=2&CurrentPage=1`
+      `https://api.welkom-u.ca/WelkomU_Test/api/UniversityManagement/GetAllUniversity?ProvinceValue=${params.province}&CityValue=${params.city}&PageSize=5&CurrentPage=1`
     );
     const data = await res.json();
-    setUserProvince(params.province);
-    setUserCity(params.city);
-
-    setUniversities(data.universities);
+    return data;
   };
 
   const createLogin = async (body) => {
@@ -84,6 +79,8 @@ const Routes = (props) => {
 
   const loginSuccess = (data) => {
     auth.authenticated = true;
+    setUserData(data.result.userProfile);
+    console.log(data.result.userProfile);
     history.push('/dashboard');
   };
   return (
@@ -94,8 +91,10 @@ const Routes = (props) => {
         closeModal={closeModal}
         cities={cities}
         fetchCities={fetchCities}
-        fetchUniversities={fetchUniversities}
         provinceLoading={provinceLoading}
+        setUserProvince={setUserProvince}
+        setUserCity={setUserCity}
+        userProvince={userProvince}
       />
       <Switch>
         <Route
@@ -108,13 +107,18 @@ const Routes = (props) => {
           )}
         />
         <div className='row'>
-          <div className='col-lg-3 sidebar'>
-            <Sidebar />
+          <div className='col-lg-3 col-xl-2 sidebar'>
+            <Sidebar userdata={userdata} />
           </div>
-          <div className='col-lg-9 body'>
+          <div className='col-lg-9 col-xl-10 body'>
             <div className='container'>
               <ProtectedRoute path='/dashboard' exact component={Dashboard} />
-              <ProtectedRoute exact path='/profile' component={Profile} />
+              <ProtectedRoute
+                exact
+                path='/profile'
+                component={Profile}
+                userdata={userdata}
+              />
               <ProtectedRoute
                 openModal={openModal}
                 fetchProvinces={fetchProvinces}
@@ -123,12 +127,17 @@ const Routes = (props) => {
                 exact
                 path='/destinations'
                 component={ExploreDestination}
+                userdata={userdata}
+                setUserCity={setUserCity}
+                setUserProvince={setUserProvince}
               />
               <ProtectedRoute
                 exact
                 path='/universities'
-                universities={universities}
                 component={Universities}
+                fetchUniversities={fetchUniversities}
+                city={userCity}
+                province={userProvince}
               />
             </div>
           </div>

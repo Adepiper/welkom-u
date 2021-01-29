@@ -1,97 +1,113 @@
-const Profile = () => {
+const Profile = (props) => {
+  const { userdata } = props;
+
   return (
     <div>
-      <div class='user-dashboard-container'>
-        <div class='container-fluid'>
-          <div class='page-header'>
-            <h1 class='text-capitalize'>user dashboard</h1>
+      <div className='user-dashboard-container'>
+        <div className='container-fluid'>
+          <div className='page-header'>
+            <h1 className='text-capitalize'>profile information</h1>
           </div>
 
-          <div class='row'>
-            <div class='col-lg-11 p-2'>
-              <div class='card profile-info'>
-                <div class='heading'>
-                  <h3 class='text-capitalize'>profile information</h3>
-                </div>
-                <div class='info-cont'>
-                  <div class='row'>
-                    <div class='col-lg-4 p-'>
-                      <div class='info'>
-                        <div class='profile-image'>
-                          <img src='/assets/imgs/profileimg.png' alt='' />
-                        </div>
-                      </div>
-                    </div>
-                    <div class='col-lg-5 p-2'>
-                      <div class='info'>
-                        <div class='row'>
-                          <div class='col-6 text-left'>
-                            <p id='bold'>Full name:</p>
-                          </div>
-                          <div class='col-6 text-right'>
-                            <p></p>
-                          </div>
-                        </div>
-
-                        <div class='row'>
-                          <div class='col-6 text-left'>
-                            <p id='bold'>Email:</p>
-                          </div>
-                          <div class='col-6 text-right'>
-                            <p></p>
-                          </div>
-                        </div>
-                        <div class='row'>
-                          <div class='col-6 text-left'>
-                            <p id='bold'>Phone Number:</p>
-                          </div>
-                          <div class='col-6 text-right'>
-                            <p></p>
-                          </div>
-                        </div>
-
-                        <div class='row'>
-                          <div class='col-6 text-left'>
-                            <p id='bold'>Account Number:</p>
-                          </div>
-                          <div class='col-6 text-right'>
-                            <p>0123535642</p>
+          <div className='card'>
+            <div className='row'>
+              <div className='col-lg-12 p-2'>
+                <div className='card profile-info'>
+                  <div className='info-cont'>
+                    <div className='row'>
+                      <div className='col-lg-4 p-'>
+                        <div className='info'>
+                          <div className='profile-image'>
+                            <img src={userdata.profile.picture} alt='' />
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class='col-lg-3 p-2'>
-                      <div class='info'>
-                        <div class='row'>
-                          <div class='col-6 text-left'>
-                            <p id='bold'>City:</p>
+                      <div className='col-lg-5 p-2'>
+                        <div className='info'>
+                          <div className='row'>
+                            <div className='col-6 text-left'>
+                              <p id='bold'>Name</p>
+                            </div>
+                            <div className='col-6 text-right'>
+                              <p>
+                                {userdata.profile.firstname}{' '}
+                                {userdata.profile.lastname}
+                              </p>
+                            </div>
                           </div>
-                          <div class='col-6 text-right'>
-                            <p></p>
+
+                          <div className='row'>
+                            <div className='col-6 text-left'>
+                              <p id='bold'>Email:</p>
+                            </div>
+                            <div className='col-6 text-right'>
+                              <p>{userdata.emailAddress}</p>
+                            </div>
+                          </div>
+                          <div className='row'>
+                            <div className='col-6 text-left'>
+                              <p id='bold'>Phone Number:</p>
+                            </div>
+                            <div className='col-6 text-right'>
+                              <p>{userdata.profile.phoneNumber}</p>
+                            </div>
+                          </div>
+
+                          <div className='row'>
+                            <div className='col-6 text-left'>
+                              <p id='bold'>Country of Residence</p>
+                            </div>
+                            <div className='col-6 text-right'>
+                              <p>{userdata.profile.countryOfResidence}</p>
+                            </div>
                           </div>
                         </div>
-                        <div class='row'>
-                          <div class='col-6 text-left'>
-                            <p id='bold'>State:</p>
+                      </div>
+                      <div className='col-lg-3 p-2'>
+                        <div className='info'>
+                          <div className='row'>
+                            <div className='col-6 text-left'>
+                              <p id='bold'>Nationality:</p>
+                            </div>
+                            <div className='col-6 text-right'>
+                              <p>{userdata.profile.nationality}</p>
+                            </div>
                           </div>
-                          <div class='col-6 text-right'>
-                            <p></p>
+                          <div className='row'>
+                            <div className='col-6 text-left'>
+                              <p id='bold'>City:</p>
+                            </div>
+                            <div className='col-6 text-right'>
+                              <p>
+                                {userdata.profile.immigrationInformation.city}
+                              </p>
+                            </div>
                           </div>
-                        </div>
-                        <div class='row'>
-                          <div class='col-6 text-left'>
-                            <p id='bold'>Country:</p>
+                          <div className='row'>
+                            <div className='col-6 text-left'>
+                              <p id='bold'>Province:</p>
+                            </div>
+                            <div className='col-6 text-right'>
+                              <p>
+                                {
+                                  userdata.profile.immigrationInformation
+                                    .province
+                                }
+                              </p>
+                            </div>
                           </div>
-                          <div class='col-6 text-right'>
-                            <p></p>
-                          </div>
-                        </div>
-                        <div class='row'>
-                          <div class='col-6 text-left'>
-                            <p id='bold'>Bank Name</p>
-                          </div>
-                          <div class='col-6 text-right'>
-                            <p>Zenith Bank</p>
+                          <div className='row'>
+                            <div className='col-6 text-left'>
+                              <p id='bold'>Destination Country</p>
+                            </div>
+                            <div className='col-6 text-right'>
+                              <p>
+                                {
+                                  userdata.profile.immigrationInformation
+                                    .destinationCountry
+                                }
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>

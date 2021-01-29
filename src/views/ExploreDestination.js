@@ -1,8 +1,23 @@
+import { useEffect } from 'react';
 import SlidingImages from '../utilities/SliderImages';
 import React from 'react';
 import { Link } from 'react-router-dom';
 const ExploreDestination = (props) => {
-  const { openModal, fetchProvinces, city, province } = props;
+  const {
+    openModal,
+    fetchProvinces,
+    city,
+    province,
+    userdata,
+    setUserCity,
+    setUserProvince,
+  } = props;
+
+  useEffect(() => {
+    setUserCity(userdata.profile.immigrationInformation.city);
+    setUserProvince(userdata.profile.immigrationInformation.province);
+  }, []);
+
   return (
     <div className='destination-container'>
       <div className='page-header'>
@@ -24,8 +39,11 @@ const ExploreDestination = (props) => {
                   />
                 </div>
                 <div className='destination-country'>
-                  <h3>Canada</h3>
-                  {province}, {city}{' '}
+                  <h3>
+                    {userdata.profile.immigrationInformation.destinationCountry}
+                  </h3>
+                  {userdata.profile.immigrationInformation.province},{' '}
+                  {userdata.profile.immigrationInformation.city}{' '}
                 </div>
               </div>
             </div>
@@ -41,7 +59,7 @@ const ExploreDestination = (props) => {
                 </div>
                 <div className='destination-country'>
                   <h3>Canada</h3>
-                  <p></p>
+                  <p>{province}</p>
                 </div>
               </div>
             </div>

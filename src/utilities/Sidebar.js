@@ -1,9 +1,9 @@
 import { withRouter } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import auth from './Auth';
 
-const Sidebar = (props, history) => {
-  const { location } = props;
+const Sidebar = (props) => {
+  const { location, history, userdata } = props;
   if (location.pathname.match('/login')) {
     return null;
   }
@@ -16,28 +16,27 @@ const Sidebar = (props, history) => {
     <div className=''>
       <div className='header'>
         <div className='profile-pic'>
-          <img src='' alt='' />
-          hello
+          <img src={userdata.profile.picture} alt='' />
         </div>
-        <h4>Hey Babajide</h4>
+        <h4>Hey {userdata.profile.firstname}</h4>
       </div>
 
       <div className='nav-home'>
         <li>
-          <Link to='/dashboard' className='active'>
+          <NavLink activeClassName='active' to='/dashboard'>
             <i className='fas fa-home'></i> <span>My Listings</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link to='/destinations'>
+          <NavLink activeClassName='active' to='/destinations'>
             <i className='far fa-heart'></i> <span>Accomodation Interests</span>
-          </Link>
+          </NavLink>
         </li>
 
         <li>
-          <Link to='/profile'>
+          <NavLink activeClassName='active' to='/profile'>
             <i className='fas fa-user-alt'></i> <span>Profile</span>
-          </Link>
+          </NavLink>
         </li>
 
         <li>

@@ -1,6 +1,7 @@
 import Modal from 'react-modal';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import coronavirus from '../views/images/coronavirus.svg';
+
 import {
   Spinner,
   FormControl,
@@ -31,12 +32,11 @@ const ModalDialog = (props) => {
     provinces,
     fetchCities,
     cities,
-    fetchUniversities,
     provinceLoading,
+    setUserProvince,
+    setUserCity,
+    userProvince,
   } = props;
-
-  province ? fetchCities(province) : console.log('no provice');
-
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -44,15 +44,19 @@ const ModalDialog = (props) => {
       console.log('error');
     }
     setLoading(true);
-
-    await fetchUniversities({ province, city });
-    setLoading(false);
+    setUserCity(city);
+    setUserProvince(province);
     stopFetch();
   };
+
+  useEffect(() => {
+    setProvince(userProvince);
+  }, []);
 
   const stopFetch = () => {
     closeModal();
     setProvince('');
+    setLoading(false);
   };
 
   return (
@@ -89,7 +93,10 @@ const ModalDialog = (props) => {
                   <FormLabel>Provinces</FormLabel>
                   <FormControl
                     value={province}
-                    onChange={(e) => setProvince(e.target.value)}
+                    onChange={(e) => {
+                      setProvince(e.target.value);
+                      fetchCities(e.target.value);
+                    }}
                     as='select'
                   >
                     {provinces.length > 0
