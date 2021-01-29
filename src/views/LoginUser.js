@@ -5,10 +5,15 @@ const LoginUser = (props) => {
   const { createLogin, error, history } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [hidden, setHidden] = useState(true);
 
   const login = async (e) => {
     e.preventDefault();
     auth.login(createLogin, { email: email, password: password });
+  };
+
+  const toggleHide = () => {
+    setHidden(!hidden);
   };
   const invalid = email === '' || password === '';
   return (
@@ -48,9 +53,13 @@ const LoginUser = (props) => {
             <div className={error ? 'error form-group' : 'form-group'}>
               <input
                 onChange={(e) => setPassword(e.target.value)}
-                type='password'
+                type={hidden ? 'password' : 'text'}
                 placeholder='Password'
               />
+              <i
+                onClick={toggleHide}
+                className={hidden ? 'fas fa-eye' : 'fas fa-eye-slash'}
+              ></i>
               <label htmlFor='floatingPassword'>Password</label>
             </div>
             <div className='forgot-password'>

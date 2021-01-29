@@ -10,6 +10,7 @@ import ModalDialog from './utilities/ModalDialog';
 import LoginUser from './views/LoginUser';
 import { ProtectedRoute } from './utilities/ProtectedRoute';
 import auth from './utilities/Auth';
+import Toggle from './utilities/Toggle';
 
 const Routes = (props) => {
   const { history } = props;
@@ -50,7 +51,6 @@ const Routes = (props) => {
   };
 
   const fetchUniversities = async (params) => {
-    console.log(params);
     const res = await fetch(
       `https://api.welkom-u.ca/WelkomU_Test/api/UniversityManagement/GetAllUniversity?ProvinceValue=${params.province}&CityValue=${params.city}&PageSize=5&CurrentPage=1`
     );
@@ -80,8 +80,7 @@ const Routes = (props) => {
   const loginSuccess = (data) => {
     auth.authenticated = true;
     setUserData(data.result.userProfile);
-    console.log(data.result.userProfile);
-    history.push('/dashboard');
+    history.push('/');
   };
   return (
     <div className='App'>
@@ -107,12 +106,12 @@ const Routes = (props) => {
           )}
         />
         <div className='row'>
-          <div className='col-lg-3 col-xl-2 sidebar'>
+          <div className='col-lg-3 col-xl-2'>
             <Sidebar userdata={userdata} />
           </div>
           <div className='col-lg-9 col-xl-10 body'>
             <div className='container'>
-              <ProtectedRoute path='/dashboard' exact component={Dashboard} />
+              <ProtectedRoute path='/' exact component={Dashboard} />
               <ProtectedRoute
                 exact
                 path='/profile'
