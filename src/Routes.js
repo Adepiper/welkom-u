@@ -8,6 +8,8 @@ import ExploreDestination from './views/ExploreDestination';
 import Universities from './views/Universities';
 import ModalDialog from './utilities/ModalDialog';
 import LoginUser from './views/LoginUser';
+import { ProtectedRoute } from './utilities/ProtectedRoute';
+import auth from './utilities/Auth';
 
 const Routes = (props) => {
   const { history } = props;
@@ -20,10 +22,7 @@ const Routes = (props) => {
   const [universities, setUniversities] = useState({});
   const [error, setError] = useState('');
   const [token, setToken] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userdata, setUserData] = useState([]);
-  // const [city, setCity] = useState('Federation');
-  // const [province, setProvince] = useState('New Brunswick');
 
   const openModal = () => {
     setIsOpen(true);
@@ -78,21 +77,17 @@ const Routes = (props) => {
       settings
     );
     const data = await res.json();
-    data.result.responseCode = '00'
+    data.result.responseCode === '00'
       ? loginSuccess(data)
       : setError(data.result.responseDescription);
   };
 
   const loginSuccess = (data) => {
-    setIsAuthenticated(true);
-    if (isAuthenticated) {
-      setUserData(data);
-    }
+    auth.authenticated = true;
     history.push('/dashboard');
   };
   return (
     <div className='App'>
-      {!isAuthenticated && <Redirect to='/login' />}
       <ModalDialog
         provinces={provinces}
         modalIsOpen={modalIsOpen}
@@ -118,33 +113,22 @@ const Routes = (props) => {
           </div>
           <div className='col-lg-9 body'>
             <div className='container'>
-              <Route path='/dashboard' exact component={Dashboard} />
-              <Route exact path='/profile' component={Profile} />
-              <Route
+              <ProtectedRoute path='/dashboard' exact component={Dashboard} />
+              <ProtectedRoute exact path='/profile' component={Profile} />
+              <ProtectedRoute
+                openModal={openModal}
+                fetchProvinces={fetchProvinces}
+                city={userCity}
+                province={userProvince}
                 exact
                 path='/destinations'
-                render={(props) => (
-                  <>
-                    <ExploreDestination
-                      openModal={openModal}
-                      fetchProvinces={fetchProvinces}
-                      city={userCity}
-                      province={userProvince}
-                    />
-                    ;
-                  </>
-                )}
+                component={ExploreDestination}
               />
-              <Route
+              <ProtectedRoute
                 exact
                 path='/universities'
-                render={(props) => (
-                  <>
-                    {universities && (
-                      <Universities universities={universities} />
-                    )}
-                  </>
-                )}
+                universities={universities}
+                component={Universities}
               />
             </div>
           </div>

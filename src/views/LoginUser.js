@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { withRouter } from 'react-router-dom';
+import auth from '../utilities/Auth';
 const LoginUser = (props) => {
   const { createLogin, error, history } = props;
   const [email, setEmail] = useState('');
@@ -7,10 +8,7 @@ const LoginUser = (props) => {
 
   const login = async (e) => {
     e.preventDefault();
-    await createLogin({ email: email, password: password });
-
-    setEmail('');
-    setPassword('');
+    auth.login(createLogin, { email: email, password: password });
   };
   const invalid = email === '' || password === '';
   return (

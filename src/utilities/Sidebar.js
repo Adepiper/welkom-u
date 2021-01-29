@@ -1,11 +1,17 @@
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import auth from './Auth';
 
-const Sidebar = (props) => {
+const Sidebar = (props, history) => {
   const { location } = props;
   if (location.pathname.match('/login')) {
     return null;
   }
+
+  const logout = () => {
+    auth.authenticated = false;
+    history.push('/login');
+  };
   return (
     <div className=''>
       <div className='header'>
@@ -18,7 +24,7 @@ const Sidebar = (props) => {
 
       <div className='nav-home'>
         <li>
-          <Link to='/' className='active'>
+          <Link to='/dashboard' className='active'>
             <i className='fas fa-home'></i> <span>My Listings</span>
           </Link>
         </li>
@@ -35,7 +41,7 @@ const Sidebar = (props) => {
         </li>
 
         <li>
-          <Link to='/'>
+          <Link onClick={logout}>
             <i className='fas fa-times'></i> <span>Logout</span>
           </Link>
         </li>
